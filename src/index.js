@@ -1,5 +1,7 @@
+// index.js
+
 import { fetchBreeds, fetchCatByBreed } from "./cat-api";
-import { showLoader, hideLoader, onFetchError } from "./helper";
+import { showLoader, hideLoader, onFetchError  } from "./helper"; // Змінено назву функції
 import Notiflix from 'notiflix';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
@@ -28,9 +30,15 @@ fetchBreeds()
     });
 
   })
-  .catch(error => onFetchError())
-  .finally(() => loader.classList.remove('is-hidden'));
-
+  .catch(error => {
+    
+    onFetchError();
+    Notiflix.Notify.failure('Oops! Something went wrong!');
+  })
+  .finally(() => {
+    hideLoader(); // Приховати завантажувач, коли запит завершено
+  
+  });
 select.addEventListener('change', onSelectBreed);
 
 
@@ -44,9 +52,8 @@ function onSelectBreed(event) {
       hideLoader();
       
       const { url, breeds } = data[0];
-        
+    
       divCatInfo.innerHTML = `
-        
         <div class="description">
           <h1>${breeds[0].name}</h1>
           <p>${breeds[0].description}</p>
@@ -57,10 +64,10 @@ function onSelectBreed(event) {
         </div>
       `;
     })
-    .catch(error =>
-      onFetchError()
-    )
-    .finally(() =>
-      loader.classList.add('is-hidden')
-    );
+    .catch(error => {
+      onFetchError();
+      Notiflix.Notify.failure('Oops! Something went wrong!');
+      hideLoader(); // Приховати завантажувач при помилці запиту
+    });
+    
 }

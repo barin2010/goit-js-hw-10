@@ -8,9 +8,9 @@ body{
   display: block !important;
 }
 
-.loader {
+/* .loader {
   display: none;
-}
+} */
 .error {
   display: none;
 }
@@ -31,13 +31,14 @@ body{
 img {
   width: 100%;
 }
-.loader {
-  margin: auto;
-  border: 20px solid darkgray;
-  border-radius: 50%;
-  border-top: 20px solid red;
-  width: 100px;
-  height: 240px;
-  --webkit-animation: spin 3s linear infinite;
-  animation: spin 3s linear infinite;
+
+
+.select.is-hidden {
+  display: none;
+}
+.error.is-hidden {
+  display: none;
+}
+p.is-hidden {
+  display: none;
 }
