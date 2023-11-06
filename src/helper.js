@@ -27,6 +27,7 @@ export function showCatLoader() {
 export function hideCatLoader() {
     loader.classList.add('is-hidden'); 
     divCatInfo.style.visibility = 'visible'; 
+}
 
 export function showLoader() {
     divCatInfo.innerHTML = '';
