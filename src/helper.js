@@ -10,24 +10,23 @@ const ref = {
 const { select, divCatInfo, loader, error } = ref;
 
 export function showBreedsLoader() {
-    select.classList.add('is-hidden'); // Приховуємо вибір породи
-    loader.classList.remove('is-hidden'); // Показуємо лоадер для списку порід
+    select.classList.add('is-hidden'); 
+    loader.classList.remove('is-hidden'); 
 }
 
 export function hideBreedsLoader() {
-    loader.classList.add('is-hidden'); // Приховуємо лоадер для списку порід
-    select.classList.remove('is-hidden'); // Показуємо вибір породи
+    loader.classList.add('is-hidden'); 
+    select.classList.remove('is-hidden'); 
 }
 
 export function showCatLoader() {
-    divCatInfo.style.visibility = 'hidden'; // Приховуємо інформацію про кота
-    loader.classList.remove('is-hidden'); // Показуємо лоадер для інформації про кота
+    divCatInfo.style.visibility = 'hidden'; 
+    loader.classList.remove('is-hidden'); 
 }
 
 export function hideCatLoader() {
-    loader.classList.add('is-hidden'); // Приховуємо лоадер для інформації про кота
-    divCatInfo.style.visibility = 'visible'; // Показуємо інформацію про кота
-}
+    loader.classList.add('is-hidden'); 
+    divCatInfo.style.visibility = 'visible'; 
 
 export function showLoader() {
     divCatInfo.innerHTML = '';

@@ -1,16 +1,16 @@
 // index.js
 
-import { fetchBreeds, fetchCatByBreed } from "./cat-api";
-import { showLoader, hideLoader, onFetchError  } from "./helper"; // Змінено назву функції
+import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import { showLoader, hideLoader, onFetchError } from './helper'; // Змінено назву функції
 import Notiflix from 'notiflix';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 
 const ref = {
-    select: document.querySelector('.breed-select'),
-    divCatInfo: document.querySelector('.cat-info'),
-    loader: document.querySelector('.loader'),
-    error: document.querySelector('.error'),
+  select: document.querySelector('.breed-select'),
+  divCatInfo: document.querySelector('.cat-info'),
+  loader: document.querySelector('.loader'),
+  error: document.querySelector('.error'),
 };
 
 const { select, divCatInfo, loader, error } = ref;
@@ -23,36 +23,32 @@ fetchBreeds()
     data.forEach(element => {
       arrBreedsId.push({ text: element.name, value: element.id });
     });
-    
+
     new SlimSelect({
       select: select,
-      data: arrBreedsId
+      data: arrBreedsId,
     });
-
   })
   .catch(error => {
-    
     onFetchError();
     Notiflix.Notify.failure('Oops! Something went wrong!');
   })
   .finally(() => {
-    hideLoader(); // Приховати завантажувач, коли запит завершено
-  
+    hideLoader();
   });
 select.addEventListener('change', onSelectBreed);
 
-
 function onSelectBreed(event) {
   showLoader();
-  
+
   const breedId = event.currentTarget.value;
 
   fetchCatByBreed(breedId)
     .then(data => {
       hideLoader();
-      
+
       const { url, breeds } = data[0];
-    
+
       divCatInfo.innerHTML = `
         <div class="description">
           <h1>${breeds[0].name}</h1>
@@ -67,7 +63,6 @@ function onSelectBreed(event) {
     .catch(error => {
       onFetchError();
       Notiflix.Notify.failure('Oops! Something went wrong!');
-      hideLoader(); // Приховати завантажувач при помилці запиту
+      hideLoader();
     });
-    
 }
